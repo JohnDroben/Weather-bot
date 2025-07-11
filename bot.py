@@ -19,7 +19,7 @@ dp = Dispatcher()
 
 # Константы
 WEATHER_URL = "https://api.openweathermap.org/data/2.5/weather"
-DEFAULT_CITIES = ["Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург", "Казань"]
+DEFAULT_CITIES = ["Москва", "Санкт-Петербург", "Новосибирск", "Екатеринбург", "Одесса"]
 
 
 def get_weather(city: str) -> str:
@@ -81,7 +81,7 @@ def get_weather_icon(code: str) -> str:
 
 
 # Обработчики сообщений
-@dp.message(Command("start"))
+@dp.message(Command('start'))
 async def start_handler(message: Message):
     await message.answer(
         "🌤️ Привет! Я бот-метеоролог.\n"
@@ -89,6 +89,16 @@ async def start_handler(message: Message):
         reply_markup=get_city_keyboard()
     )
 
+@dp.message(Command('help'))
+async def help_handler(message: Message):
+    await message.answer(
+        "Этот бот умеет выполнять команды:"
+        "\n/start"  "- Запуск бота"
+        "\n/help"  "- Помощь"
+        "\n/cities"  "- Выбор города",
+        reply_markup = get_city_keyboard()
+
+    )
 
 @dp.message(Command("cities"))
 async def cities_handler(message: Message):
