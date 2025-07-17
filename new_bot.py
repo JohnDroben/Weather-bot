@@ -40,6 +40,7 @@ async def start_handler(message: Message):
         "\n/contact"  "- Контакт"
         "\n/training"  "- Тренировка"
         "\n/translate"  "- Перевод"
+        "\n/voice"  "- Голосовое сообщение"
 
     )
 @dp.message(Command('help'))
@@ -57,6 +58,7 @@ async def help_handler(message: Message):
         "\n/contact"  "- Контакт"
         "\n/training"  "- Тренировка"
         "\n/translate"  "- Перевод"
+        "\n/voice"  "- Голосовое сообщение"
     )
 
 @dp.message(Command('photo'))
@@ -73,6 +75,12 @@ async def audio_handler(message: Message):
     await message.answer_audio(
         audio="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"
     )
+
+@dp.message(Command('voice'))
+async def voice_handler(message: Message):
+    voice = FSInputFile("sample.ogg")
+    await message.answer_voice(voice)
+
 
 @dp.message(Command('video'))
 async def video_handler(message: Message):
